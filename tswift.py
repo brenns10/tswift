@@ -71,7 +71,7 @@ class Artist(object):
         self.songs = None
         self._name = name
 
-    def load(self):
+    def load(self, verbose=False):
         """
         Load the list of songs.
 
@@ -85,7 +85,8 @@ class Artist(object):
         total_pages = 1
 
         while page_num <= total_pages:
-            # print('retrieving page %d' % page_num)
+            if verbose:
+                print('retrieving page %d' % page_num)
             page = requests.get(ARTIST_URL.format(artist=self._name,
                                                   n=page_num))
             tree = html.fromstring(page.text)
