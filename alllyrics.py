@@ -4,18 +4,21 @@ Download all the song lyrics for a particular artist, store in a file.
 """
 
 from __future__ import print_function
-from tswift import Artist
+from multiprocessing.pool import ThreadPool
+
+from tswift import Artist, Song
 
 
 def download_all_songs(artist, outfn):
     artist_object = Artist(artist)
     artist_object.load(verbose=True)
-    nsongs = len(artist_object.songs)
     outfile = open(outfn, 'w')
 
-    for i, song in enumerate(artist_object.songs):
-        print("%03d/%03d - %s - %s" % (i, nsongs, song._title, song._artist))
-        song.load()
+    pool = ThreadPool()
+    songs = artist_object.songs
+    print('loading %d songs in parallel!' % len(artist_object.songs))
+    pool.map(Song.load, songs)
+    for song in songs:
         print(song.lyrics, file=outfile)
         print("\n\n", file=outfile)
 
