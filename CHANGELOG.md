@@ -2,6 +2,14 @@ Changelog
 =========
 
 ## [Unreleased]
+### Fixed
+- Variable names
+- Unnecessary ```__str__``` definitions
+
+### Added
+- Artist name and song name arguments
+- Naive slug and deslug
+- Song formatting for pretty printing
 
 ## [0.2.0] - 2016-07-16
 ### Fixed
