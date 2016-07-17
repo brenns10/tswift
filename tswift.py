@@ -13,10 +13,18 @@ from lxml import html
 import requests
 import re
 import random
+import sys
 
 ARTIST_URL = "http://www.metrolyrics.com/{artist}-alpage-{n}.html"
 SONG_URL = "http://www.metrolyrics.com/{title}-lyrics-{artist}.html"
 SONG_RE = r'http://www\.metrolyrics\.com/(.*)-lyrics-(.*)\.html'
+
+
+def slugify(string):
+    return string.replace(' ', '-').lower()
+
+def deslugify(string):
+    return string.replace('-', ' ').title()
 
 
 class Song(object):
@@ -33,13 +41,19 @@ class Song(object):
         self._lyrics = None
         if url is not None:
             self._url = url
-            self._title, self._artist = re.match(SONG_RE, url).groups()
+            self.title, self.artist = re.match(SONG_RE, url).groups()
         elif title is not None and artist is not None:
-            self._title = title
-            self._artist = artist
-            self._url = SONG_URL.format(title=title, artist=artist)
+            self.title = title
+            self.artist = artist
+            self._url = SONG_URL.format(
+                title=slugify(title),
+                artist=slugify(artist),
+            )
         else:
             raise ValueError('Must provide either title & artist or URL.')
+
+        self.title = deslugify(self.title)
+        self.artist = deslugify(self.artist)
 
     def load(self):
         """Load the lyrics from MetroLyrics."""
@@ -59,11 +73,16 @@ class Song(object):
             self.load()
         return self._lyrics
 
-    def __str__(self):
-        return 'Song(title=%r, artist=%r)' % (self._title, self._artist)
+    def format(self):
+        return '%s\n%s\n%s\n\n%s' % (
+            self.title,
+            self.artist,
+            '-' * max(len(self.title), len(self.artist)),
+            self.lyrics,
+        )
 
     def __repr__(self):
-        return self.__str__()
+        return 'Song(title=%r, artist=%r)' % (self.title, self.artist)
 
 
 class Artist(object):
@@ -79,7 +98,7 @@ class Artist(object):
 
     def __init__(self, name):
         self._songs = None
-        self._name = name
+        self.name = slugify(name)
 
     def load(self, verbose=False):
         """
@@ -97,7 +116,7 @@ class Artist(object):
         while page_num <= total_pages:
             if verbose:
                 print('retrieving page %d' % page_num)
-            page = requests.get(ARTIST_URL.format(artist=self._name,
+            page = requests.get(ARTIST_URL.format(artist=self.name,
                                                   n=page_num))
             tree = html.fromstring(page.text)
             song_rows_xp = r'//*[@id="popular"]/div/table/tbody/tr'
@@ -120,14 +139,27 @@ class Artist(object):
             self.load()
         return self._songs
 
-    def __str__(self):
-        return 'Artist(%r)' % self._name
-
     def __repr__(self):
-        return self.__str__()
+        return 'Artist(%r)' % self.name
 
 
 if __name__ == '__main__':
-    tswift = Artist('taylor-swift')
-    song = random.choice(tswift.songs)
-    print(song.lyrics)
+    artist_name = 'Taylor Swift'
+    song_name = None
+
+    if len(sys.argv) > 1:
+        artist_name = sys.argv[1]
+
+    if len(sys.argv) > 2:
+        song_name = sys.argv[2]
+
+    if song_name:
+        song = Song(
+            title=song_name,
+            artist=artist_name,
+        )
+    else:
+        artist = Artist(artist_name)
+        song = random.choice(artist.songs)
+
+    print(song.format())
