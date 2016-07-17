@@ -11,7 +11,7 @@ Python API for getting lyrics from MetroLyrics.  Here is how easy it is:
 
     tswift = Artist('Taylor Swift')
     song = random.choice(tswift.songs)
-    print(song.lyrics)
+    print(song.format())
 
 Setup
 -----
