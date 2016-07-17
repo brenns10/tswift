@@ -30,7 +30,7 @@ class Song(object):
         lower-case hyphenated song title and artist.  If both are provided, the
         URL is preferred.
         """
-        self.lyrics = None
+        self._lyrics = None
         if url is not None:
             self._url = url
             self._title, self._artist = re.match(SONG_RE, url).groups()
@@ -50,7 +50,14 @@ class Song(object):
         tree = html.fromstring(page.text)
         lyric_div = tree.get_element_by_id('lyrics-body-text')
         verses = [c.text_content() for c in lyric_div]
-        self.lyrics = '\n\n'.join(verses)
+        self._lyrics = '\n\n'.join(verses)
+        return self
+
+    @property
+    def lyrics(self):
+        if self._lyrics is None:
+            self.load()
+        return self._lyrics
 
     def __str__(self):
         return 'Song(title=%r, artist=%r)' % (self._title, self._artist)
@@ -71,7 +78,7 @@ class Artist(object):
     """
 
     def __init__(self, name):
-        self.songs = None
+        self._songs = None
         self._name = name
 
     def load(self, verbose=False):
@@ -83,7 +90,7 @@ class Artist(object):
         listed here.  There is a list on the artist page for that, I just
         haven't added any parsing code for that, since I don't need it.
         """
-        self.songs = []
+        self._songs = []
         page_num = 1
         total_pages = 1
 
@@ -101,10 +108,17 @@ class Artist(object):
             for row in rows:
                 song_link = row.xpath(r'./td/a[contains(@class,"title")]')
                 assert len(song_link) == 1
-                self.songs.append(Song(url=song_link[0].attrib['href']))
+                self._songs.append(Song(url=song_link[0].attrib['href']))
 
             total_pages = len(tree.xpath(songlist_pagination_xp))
             page_num += 1
+        return self
+
+    @property
+    def songs(self):
+        if self._songs is None:
+            self.load()
+        return self._songs
 
     def __str__(self):
         return 'Artist(%r)' % self._name
