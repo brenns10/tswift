@@ -2,6 +2,14 @@ Changelog
 =========
 
 ## [Unreleased]
+### Fixed
+- Variable names prefixed with underscore when they should convey publicness
+- Unnecessary ```__str__``` definitions due to ```__repr__``` implementations
+
+### Added
+- Artist name and song name arguments
+- Naive slug and deslug
+- Song formatting for pretty printing
 
 ## [0.2.0] - 2016-07-16
 ### Fixed
