@@ -7,6 +7,7 @@ Changelog
 ### Fixed
 - Forced UTF-8 encoding to prevent character mangling, thanks
   @EsotericAlgorithm!
+
 ### Added
 - Simplified API: `Artist.songs` and `Song.lyrics` are now properties that are
   loaded on first access, so calling `load()` is no longer necessary.
