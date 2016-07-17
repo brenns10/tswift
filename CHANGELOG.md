@@ -3,8 +3,8 @@ Changelog
 
 ## [Unreleased]
 ### Fixed
-- Variable names
-- Unnecessary ```__str__``` definitions
+- Variable names prefixed with underscore when they should convey publicness
+- Unnecessary ```__str__``` definitions due to ```__repr__``` implementations
 
 ### Added
 - Artist name and song name arguments
