@@ -23,6 +23,7 @@ SONG_RE = r'http://www\.metrolyrics\.com/(.*)-lyrics-(.*)\.html'
 def slugify(string):
     return string.replace(' ', '-').lower()
 
+
 def deslugify(string):
     return string.replace('-', ' ').title()
 
