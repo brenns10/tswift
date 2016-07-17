@@ -123,6 +123,9 @@ class Artist(object):
     def __str__(self):
         return 'Artist(%r)' % self._name
 
+    def __repr__(self):
+        return self.__str__()
+
 
 if __name__ == '__main__':
     tswift = Artist('taylor-swift')
