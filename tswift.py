@@ -129,7 +129,5 @@ class Artist(object):
 
 if __name__ == '__main__':
     tswift = Artist('taylor-swift')
-    tswift.load()
     song = random.choice(tswift.songs)
-    song.load()
     print(song.lyrics)
