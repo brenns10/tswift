@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## [Super Unreleased]
+### Added
+- ```find_song``` helper function via the ```google``` package
+- ```lyrics.py``` CLI entrypoint for ```find_song```
+
 ## [Unreleased]
 ### Fixed
 - Variable names prefixed with underscore when they should convey publicness
