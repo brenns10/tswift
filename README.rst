@@ -16,7 +16,7 @@ Python API for getting lyrics from MetroLyrics.  Here is how easy it is:
 Setup
 -----
 
-This package depends on ``lxml`` and ``requests``.  These should be installed
+This package depends on ``lxml``, ``requests``, and ``google``.  These should be installed
 when you install this package from pip:
 
 .. code::

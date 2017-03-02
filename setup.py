@@ -7,7 +7,7 @@ setup(
     version='0.2.0',
     description='MetroLyrics API',
     long_description=long_description,
-    install_requires=['lxml', 'requests'],
+    install_requires=['lxml', 'requests', 'google'],
     url='https://github.com/brenns10/tswift',
     author='Stephen Brennan',
     author_email='stephen@stephen-brennan.com',

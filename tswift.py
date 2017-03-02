@@ -10,6 +10,8 @@ songs written by a certain artist (for example, Taylor Swift).
 """
 
 from lxml import html
+from google import search
+import argparse
 import requests
 import re
 import random
@@ -85,6 +87,13 @@ class Song(object):
     def __repr__(self):
         return 'Song(title=%r, artist=%r)' % (self.title, self.artist)
 
+    @staticmethod
+    def find_song(lyrics):
+        for url in search('site:www.metrolyrics.com ' + lyrics, stop=20):
+            if re.match(SONG_RE, url):
+                return Song(url=url)
+        return None
+
 
 class Artist(object):
     """
@@ -145,22 +154,41 @@ class Artist(object):
 
 
 if __name__ == '__main__':
-    artist_name = 'Taylor Swift'
-    song_name = None
+    parser = argparse.ArgumentParser(
+        description='Search artists, lyrics, and songs!'
+    )
+    parser.add_argument(
+        'artist',
+        help='Specify an artist name (Default: Taylor Swift)',
+        default='Taylor Swift',
+        nargs='?',
+    )
+    parser.add_argument(
+        '-s', '--song',
+        help='Given artist name, specify a song name',
+        required=False,
+    )
+    parser.add_argument(
+        '-l', '--lyrics',
+        help='Search for song by lyrics',
+        required=False,
+    )
+    args = parser.parse_args()
 
-    if len(sys.argv) > 1:
-        artist_name = sys.argv[1]
-
-    if len(sys.argv) > 2:
-        song_name = sys.argv[2]
-
-    if song_name:
-        song = Song(
-            title=song_name,
-            artist=artist_name,
-        )
+    if args.lyrics:
+        song = Song.find_song(args.lyrics)
     else:
-        artist = Artist(artist_name)
-        song = random.choice(artist.songs)
+        if args.song:
+            song = Song(
+                title=args.song,
+                artist=args.artist,
+            )
+        else:
+            artist = Artist(args.artist)
+            if artist.songs:
+                song = random.choice(artist.songs)
+            else:
+                print(f'Couldn\'t find any songs by artist {args.artist}!')
+                sys.exit(1)
 
     print(song.format())
