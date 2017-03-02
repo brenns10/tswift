@@ -1,11 +1,6 @@
 Changelog
 =========
 
-## [Super Unreleased]
-### Added
-- ```find_song``` helper function via the ```google``` package
-- ```lyrics.py``` CLI entrypoint for ```find_song```
-
 ## [Unreleased]
 ### Fixed
 - Variable names prefixed with underscore when they should convey publicness
@@ -15,6 +10,8 @@ Changelog
 - Artist name and song name arguments
 - Naive slug and deslug
 - Song formatting for pretty printing
+- ```find_song``` helper function via the ```google``` package
+- ```lyrics.py``` CLI entrypoint for ```find_song```
 
 ## [0.2.0] - 2016-07-16
 ### Fixed
