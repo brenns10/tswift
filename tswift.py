@@ -154,13 +154,26 @@ class Artist(object):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Search artists, lyrics, and songs!')
-    parser.add_argument('-a', '--artist', help='Specify an artist name', required=False)
-    parser.add_argument('-s', '--song', help='Specify a song name', required=False)
-    parser.add_argument('-l', '--lyrics', help='Search for song by lyrics', required=False)
+    parser = argparse.ArgumentParser(
+        description='Search artists, lyrics, and songs!'
+    )
+    parser.add_argument(
+        'artist',
+        help='Specify an artist name (Default: Taylor Swift)',
+        default='Taylor Swift',
+        nargs='?',
+    )
+    parser.add_argument(
+        '-s', '--song',
+        help='Given artist name, specify a song name',
+        required=False,
+    )
+    parser.add_argument(
+        '-l', '--lyrics',
+        help='Search for song by lyrics',
+        required=False,
+    )
     args = parser.parse_args()
-
-    args.artist = args.artist or 'Taylor Swift'
 
     if args.lyrics:
         song = Song.find_song(args.lyrics)
