@@ -188,7 +188,8 @@ if __name__ == '__main__':
             if artist.songs:
                 song = random.choice(artist.songs)
             else:
-                print(f'Couldn\'t find any songs by artist {args.artist}!')
+                print('Couldn\'t find any songs by artist {}!'
+                      .format(args.artist))
                 sys.exit(1)
 
     print(song.format())
