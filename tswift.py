@@ -37,8 +37,8 @@ class Song(object):
         """
         Create a song.
 
-        You can EITHER provide a URL for the song lyrics, OR provide the
-        lower-case hyphenated song title and artist.  If both are provided, the
+        You can EITHER provide a URL for the song lyrics, OR provide the song
+        title and artist (which will be slugified). If both are provided, the
         URL is preferred.
         """
         self._lyrics = None
@@ -153,7 +153,10 @@ class Artist(object):
         return 'Artist(%r)' % self.name
 
 
-if __name__ == '__main__':
+def main():
+    """
+    Run the CLI.
+    """
     parser = argparse.ArgumentParser(
         description='Search artists, lyrics, and songs!'
     )
@@ -193,3 +196,7 @@ if __name__ == '__main__':
                 sys.exit(1)
 
     print(song.format())
+
+
+if __name__ == '__main__':
+    main()
