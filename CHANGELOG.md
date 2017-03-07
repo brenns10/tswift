@@ -1,17 +1,17 @@
 Changelog
 =========
 
-## [Unreleased]
+## [0.3.0] - 2017-03-07
 ### Fixed
 - Variable names prefixed with underscore when they should convey publicness
-- Unnecessary ```__str__``` definitions due to ```__repr__``` implementations
+- Removed unnecessary `__str__` definitions due to `__repr__` implementations
 
 ### Added
-- Artist name and song name arguments
-- Naive slug and deslug
+- Slugify and deslugify
 - Song formatting for pretty printing
-- ```find_song``` helper function via the ```google``` package
-- ```lyrics.py``` CLI entrypoint for ```find_song```
+- Entry point for CLI, `tswift`
+- Search for lyrics via the `google` package
+- Artist name and song name CLI arguments
 
 ## [0.2.0] - 2016-07-16
 ### Fixed

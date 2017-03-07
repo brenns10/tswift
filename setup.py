@@ -4,13 +4,13 @@ long_description = open('README.rst').read()
 
 setup(
     name='tswift',
-    version='0.2.0',
+    version='0.3.0',
     description='MetroLyrics API',
     long_description=long_description,
     install_requires=['lxml', 'requests', 'google'],
     url='https://github.com/brenns10/tswift',
     author='Stephen Brennan',
-    author_email='stephen@stephen-brennan.com',
+    author_email='stephen@brennan.io',
     license='Revised BSD',
     py_modules=['tswift'],
     classifiers=[
@@ -22,4 +22,9 @@ setup(
         'Natural Language :: English',
     ],
     keywords='lyrics metrolyrics scrape',
+    entry_points={
+        'console_scripts': [
+            'tswift=tswift:main',
+        ],
+    },
 )
