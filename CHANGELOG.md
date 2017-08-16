@@ -8,6 +8,8 @@ don't really adhere to Semantic Versioning. But that's mostly because we don't
 make many changes to this project.
 
 ## [Unreleased]
+### Fixed
+- Change the method of searching for lyrics on a page
 
 ## [0.3.0] - 2017-03-07
 ### Fixed
