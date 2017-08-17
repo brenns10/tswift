@@ -4,7 +4,7 @@ long_description = open('README.rst').read()
 
 setup(
     name='tswift',
-    version='0.3.0',
+    version='0.4.0',
     description='MetroLyrics API',
     long_description=long_description,
     install_requires=['lxml', 'requests', 'google'],
