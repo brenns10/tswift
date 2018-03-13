@@ -10,7 +10,7 @@ songs written by a certain artist (for example, Taylor Swift).
 """
 
 from lxml import html
-from google import search
+from googlesearch import search
 import argparse
 import requests
 import re
