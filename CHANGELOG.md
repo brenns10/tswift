@@ -9,6 +9,10 @@ make many changes to this project.
 
 ## [Unreleased]
 
+## [0.5.0] - 2018-03-13
+### Fixed
+- Fix import due to upstream name change (google -> googlesearch)
+
 ## [0.4.0] - 2017-08-16
 ### Fixed
 - Fix error caused by HTML comments within song div. Thanks [@nizzit][]!

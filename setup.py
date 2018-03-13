@@ -4,10 +4,10 @@ long_description = open('README.rst').read()
 
 setup(
     name='tswift',
-    version='0.4.0',
+    version='0.5.0',
     description='MetroLyrics API',
     long_description=long_description,
-    install_requires=['lxml', 'requests', 'google'],
+    install_requires=['lxml', 'requests', 'google>=2.0'],
     url='https://github.com/brenns10/tswift',
     author='Stephen Brennan',
     author_email='stephen@brennan.io',
