@@ -9,6 +9,14 @@ make many changes to this project.
 
 ## [Unreleased]
 
+## [0.6.0] - 2019-11-09
+### Fixed
+- Fix `AttributeError` due to unmatched regex - Metrolyrics has switched all
+  links to HTTPS by default.
+
+### Changed
+- All URLs this package loads use HTTPS by default.
+
 ## [0.5.0] - 2018-03-13
 ### Fixed
 - Fix import due to upstream name change (google -> googlesearch)

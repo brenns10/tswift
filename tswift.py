@@ -17,9 +17,9 @@ import re
 import random
 import sys
 
-ARTIST_URL = "http://www.metrolyrics.com/{artist}-alpage-{n}.html"
-SONG_URL = "http://www.metrolyrics.com/{title}-lyrics-{artist}.html"
-SONG_RE = r'http://www\.metrolyrics\.com/(.*)-lyrics-(.*)\.html'
+ARTIST_URL = "https://www.metrolyrics.com/{artist}-alpage-{n}.html"
+SONG_URL = "https://www.metrolyrics.com/{title}-lyrics-{artist}.html"
+SONG_RE = r'https?://www\.metrolyrics\.com/(.*)-lyrics-(.*)\.html'
 
 
 def slugify(string):
