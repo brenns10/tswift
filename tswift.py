@@ -17,7 +17,6 @@ import re
 import random
 import sys
 
-from exceptions import TswiftError
 
 ARTIST_URL = "https://www.metrolyrics.com/{artist}-alpage-{n}.html"
 SONG_URL = "https://www.metrolyrics.com/{title}-lyrics-{artist}.html"
@@ -30,6 +29,10 @@ def slugify(string):
 
 def deslugify(string):
     return string.replace('-', ' ').title()
+
+
+class TswiftError(Exception):
+    """Base exception for errors raised in tswift."""
 
 
 class Song(object):
