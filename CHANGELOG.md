@@ -9,6 +9,15 @@ make many changes to this project.
 
 ## [Unreleased]
 
+## [0.7.0] - 2020-04-27
+### Fixed
+- Fix error handling if no lyrics were found in the Metrolyrics API either as a 200 response with
+  a missing 'lyrics-body-text' element or a 404 response.
+
+### Changed
+- A base level exception file and class `TswiftError` was added to catch any absent lyrics
+  from requests made to Metrolyrics.
+
 ## [0.6.0] - 2019-11-09
 ### Fixed
 - Fix `AttributeError` due to unmatched regex - Metrolyrics has switched all

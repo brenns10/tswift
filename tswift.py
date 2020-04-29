@@ -17,6 +17,7 @@ import re
 import random
 import sys
 
+
 ARTIST_URL = "https://www.metrolyrics.com/{artist}-alpage-{n}.html"
 SONG_URL = "https://www.metrolyrics.com/{title}-lyrics-{artist}.html"
 SONG_RE = r'https?://www\.metrolyrics\.com/(.*)-lyrics-(.*)\.html'
@@ -28,6 +29,10 @@ def slugify(string):
 
 def deslugify(string):
     return string.replace('-', ' ').title()
+
+
+class TswiftError(Exception):
+    """Base exception for errors raised in tswift."""
 
 
 class Song(object):
@@ -61,13 +66,22 @@ class Song(object):
     def load(self):
         """Load the lyrics from MetroLyrics."""
         page = requests.get(self._url)
+
+        if page.status_code > 200:
+            raise TswiftError("No lyrics available for requested song")
+
         # Forces utf-8 to prevent character mangling
         page.encoding = 'utf-8'
 
         tree = html.fromstring(page.text)
-        lyric_div = tree.get_element_by_id('lyrics-body-text')
-        verses = [c.text_content() for c in lyric_div.find_class('verse')]
-        self._lyrics = '\n\n'.join(verses)
+        try:
+            lyric_div = tree.get_element_by_id('lyrics-body-text')
+            verses = [c.text_content() for c in lyric_div.find_class('verse')]
+        except KeyError:
+            raise TswiftError("No lyrics available for requested song")
+        else:
+            self._lyrics = '\n\n'.join(verses)
+
         return self
 
     @property
