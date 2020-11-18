@@ -4,3 +4,5 @@ requests>=2.7.0
 twine>=1.5.0
 wheel>=0.24.0
 google>=1.9.1
+setuptools~=50.3.2
+fpdf~=1.7.2

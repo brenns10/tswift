@@ -16,7 +16,7 @@ import requests
 import re
 import random
 import sys
-
+from fpdf import FPDF
 
 ARTIST_URL = "https://www.metrolyrics.com/{artist}-alpage-{n}.html"
 SONG_URL = "https://www.metrolyrics.com/{title}-lyrics-{artist}.html"
@@ -83,6 +83,20 @@ class Song(object):
             self._lyrics = '\n\n'.join(verses)
 
         return self
+
+    def printf(self):
+        """Print the lyrics to pdf file in current working directory"""
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font("Helvetica", size=12)
+        lines = self.format().split("\n")
+        for line in lines:
+            # deal with western european letters
+            line = line.encode(encoding='cp1252')
+            line = line.decode(encoding='latin-1', errors='replace')
+            pdf.cell(200, 5, txt=line, ln=1)
+        pdf.output(slugify(self.title) + '_' + slugify(self.artist) + '.pdf')
+
 
     @property
     def lyrics(self):
@@ -190,6 +204,12 @@ def main():
         help='Search for song by lyrics',
         required=False,
     )
+    parser.add_argument(
+        '-f', '--to_pdf',
+        help='Print lyrics to pdf in current working directory',
+        action='store_true',
+        required=False
+    )
     args = parser.parse_args()
 
     if args.lyrics:
@@ -208,6 +228,9 @@ def main():
                 print('Couldn\'t find any songs by artist {}!'
                       .format(args.artist))
                 sys.exit(1)
+
+    if song and args.to_pdf:
+        song.printf()
 
     print(song.format())
 
