@@ -97,7 +97,6 @@ class Song(object):
             pdf.cell(200, 5, txt=line, ln=1)
         pdf.output(slugify(self.title) + '_' + slugify(self.artist) + '.pdf')
 
-
     @property
     def lyrics(self):
         if self._lyrics is None:
