@@ -1,3 +1,32 @@
+GOODBYE CRUEL WORLD
+===================
+
+I'm sorry to report that, as of June 29, 2021, `Metrolyrics has mysteriously
+gone offline <https://en.wikipedia.org/wiki/MetroLyrics>`_. As a result, **this
+package is functionally dead and useless.** If you use it, you'll probably get
+an exception like the following:
+
+.. code ::
+
+    $ tswift -l 'so casually cruel in the name of being honest'
+    Traceback (most recent call last):
+      File "/usr/lib/python3/dist-packages/urllib3/connection.py", line 169, in _new_conn
+        conn = connection.create_connection(
+      File "/usr/lib/python3/dist-packages/urllib3/util/connection.py", line 73, in create_connection
+        for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+      File "/usr/lib/python3.9/socket.py", line 953, in getaddrinfo
+        for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+    socket.gaierror: [Errno -5] No address associated with hostname
+
+    During handling of the above exception, another exception occurred:
+    .... many more tracebacks ....
+
+Maybe someday I'll select a new lyric website and try to implement a similar API
+from it. But it's unlikely it would be compatible (depends on the URL structure)
+and the content list (and formatting) would likely be different as well.
+
+Rest in peace, Metrolyrics.
+
 tswift
 ======
 
