@@ -6,7 +6,7 @@ gone offline <https://en.wikipedia.org/wiki/MetroLyrics>`_. As a result, **this
 package is functionally dead and useless.** If you use it, you'll probably get
 an exception like the following:
 
-.. code ::
+.. code::
 
     $ tswift -l 'so casually cruel in the name of being honest'
     Traceback (most recent call last):
